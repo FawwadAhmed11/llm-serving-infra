@@ -92,6 +92,7 @@ All networking, autoscaling, and observability config remains unchanged.
 
 ## Project structure
 
+```
 llm-serving-infra/
 ├── modules/
 │   ├── vpc/          # VPC, subnets, IGW, NAT, route tables
@@ -104,14 +105,7 @@ llm-serving-infra/
 └── k8s/
     ├── vllm-mocks/   # Deployment, Service, HPA, Karpenter
     └── prometheus/   # Helm install, ServiceMonitor, Grafana dashboard
-
-## Deploy
-
-# Initialize and apply
-cd envs/dev
-terraform init
-terraform plan
-terraform apply
+```
 
 # Configure kubectl
 aws eks update-kubeconfig --name fawwad-cluster --region us-east-1
