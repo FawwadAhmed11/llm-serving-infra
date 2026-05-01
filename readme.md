@@ -92,7 +92,7 @@ All networking, autoscaling, and observability config remains unchanged.
 
 ## Project structure
 
-terraform-aws-platform/
+llm-serving-infra/
 ├── modules/
 │   ├── vpc/          # VPC, subnets, IGW, NAT, route tables
 │   └── eks/          # EKS cluster, node group, IAM roles
@@ -102,7 +102,7 @@ terraform-aws-platform/
 │       ├── backend.tf # S3 remote state + DynamoDB locking
 │       └── outputs.tf
 └── k8s/
-    ├── vllm-mock/    # Deployment, Service, HPA, Karpenter
+    ├── vllm-mocks/   # Deployment, Service, HPA, Karpenter
     └── prometheus/   # Helm install, ServiceMonitor, Grafana dashboard
 
 ## Deploy
