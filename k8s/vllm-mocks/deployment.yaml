@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-mock
+  namespace: default
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vllm-mock 
+
+  template: 
+    metadata:
+      labels:
+        app: vllm-mock
+    spec:
+      containers:
+        - name: vllm-mock
+          image: python:3.11-slim
+          command: ["python", "-c"]
+          args:
+            - | 
+              import http.server, json
+              class Handler(http.server.BaseHTTPRequestHandler):
+                def do_POST(self):
+                  self.send_response(200)
+                  self.send_header('Content-Type', 'application/json')
+                  self.end_headers()
+                  response = {"choices": [{"text": "mock response", "index": 0}]}
+                  self.wfile.write(json.dumps(response).encode())
+              http.server.HTTPServer(('', 8000), Handler).serve_forever()
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
