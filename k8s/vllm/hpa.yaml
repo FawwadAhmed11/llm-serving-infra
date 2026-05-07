@@ -1,18 +1,18 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
-metadata: 
-  name: vllm-mock-hpa 
+metadata:
+  name: vllm-hpa
   namespace: default
-spec: 
+spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: vllm-mock 
-  minReplicas: 2
-  maxReplicas: 8
-  metrics: 
+    name: vllm
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
     - type: Resource
-      resource: 
+      resource:
         name: cpu
         target:
           type: Utilization
